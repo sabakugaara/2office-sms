@@ -6,7 +6,7 @@ const endPoint = 'http://sms.2office.net:8080/WebService/SmsService.asmx'
 /**
  * @param account
  * @param password
- * @param servivalKey
+ * @param serivalKey
  */
 function Office2 (options) {
   this._config = options
