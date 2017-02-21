@@ -1,5 +1,7 @@
 ## Install
-
+```
+npm i 2office-sms --save
+```
 
 ## Usage
 ```
