@@ -18,6 +18,13 @@ office2.sendSms('18902xxxxxx', 'message content', 'your_channel', new Date().get
 })
 ```
 
+## Api
+
+- sendSms
+  send normal sms(text message)
+- sendVoiceSms
+  send voice sms(voice call)
+
 ## Test
 
 modify `test/fixture.json`, and run `mocha`

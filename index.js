@@ -7,6 +7,7 @@ const endPoint = 'http://sms.2office.net:8080/WebService/SmsService.asmx'
  * @param account
  * @param password
  * @param serivalKey
+ * @param voiceKey
  */
 function Office2 (options) {
   this._config = options
@@ -43,6 +44,30 @@ Office2.prototype.sendSms = function (mobile, content, channel, smsid, sendType,
       }
       return callback(null, parsed[1])
     })
+  })
+}
+
+Office2.prototype.sendVoiceSms = function (mobile, content, smsid, sendType, callback) {
+  return request.post({
+    url: 'http://voicesms.2office.net:8080/WebService/VoiceVerification.aspx',
+    form: {
+      account: this._config.account,
+      password: md5(this._config.password + this._config.voiceKey),
+      descnum: mobile,
+      content: content,
+      voiceid: smsid,
+      voicetype: sendType || 1
+    }
+  }, function (err, res, body) {
+    if (err) {
+      return callback(err)
+    }
+    const parsed = body.split(',')
+
+    if (parsed[0] !== '0') {
+      return callback(new Error(parsed[1]))
+    }
+    return callback(null, parsed[1])
   })
 }
 
